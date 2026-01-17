@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: 0 20 * * *
-
+permissions:
+  contents: write  # Cho phép tạo/edit release
 env:
   REPO_URL: https://github.com/zhoufuli/immortalwrt-rk356x
   REPO_BRANCH: main
