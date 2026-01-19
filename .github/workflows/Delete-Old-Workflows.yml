@@ -1,26 +1,20 @@
-name: Delete Old Workflows
+name: Delete Old Workflow Runs
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: 0 3 * * *
+    - cron: '0 3 * * *'   # 3h sáng UTC
 
 jobs:
-  Cleaning:
-    runs-on: ubuntu-22.04
-
+  cleanup:
+    runs-on: ubuntu-latest
     steps:
-    - name: Delete Old Workflows
-      uses: Mattraks/delete-workflow-runs@main
-      with:
-        token: ${{ secrets.ACCESS_TOKEN }}
-        retain_days: 20
-        keep_minimum_runs: 15
-
-    - name: Delete Old Releases
-      uses: dev-drprasad/delete-older-releases@master
-      with:
-        keep_latest: 180
-        delete_tags: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+      - name: Delete old workflow runs
+        uses: dawidd6/action-delete-workflow-runs@v3   # vẫn active 2026
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 20
+          keep_minimum_runs: 15
+          delete_only_orphaned: true   # xóa cả run của workflow đã xóa file YAML
+          dry_run: false
