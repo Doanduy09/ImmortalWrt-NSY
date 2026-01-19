@@ -1,20 +1,21 @@
-name: Delete Old Workflow Runs
+name: Cache-Clean
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 3 * * *'   # 3h sáng UTC
+    - cron: 0 20 * * 0
+  workflow_dispatch:
+
+permissions: write-all
+
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
 jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete old workflow runs
-        uses: dawidd6/action-delete-workflow-runs@v3   # vẫn active 2026
-        with:
-          token: ${{ secrets.ACCESS_TOKEN }}
-          repository: ${{ github.repository }}
-          retain_days: 20
-          keep_minimum_runs: 15
-          delete_only_orphaned: true   # xóa cả run của workflow đã xóa file YAML
-          dry_run: false
+      - name: Checkout Projects
+        uses: actions/checkout@main
+
+      - name: Cache Clean
+        run: gh cache delete --all
