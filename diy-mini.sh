@@ -11,7 +11,7 @@ echo "src-git all                https://github.com/kiddin9/kwrt-packages.git" >
 echo "src-git qmodem             https://github.com/FUjr/QModem.git;main" >> feeds.conf.default
 echo "src-git modemdata          https://github.com/obsy/modemdata.git" >> feeds.conf.default
 echo "src-git luci_app_modemdata https://github.com/4IceG/luci-app-modemdata.git" >> feeds.conf.default
-
+echo "src-git modemfeed https://github.com/koshev-msk/modemfeed.git" >> feeds.conf.default
 # =============================================
 # CÁC PHẦN CŨ CỦA BẠN (giữ nguyên)
 # =============================================
