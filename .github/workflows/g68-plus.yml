@@ -1,4 +1,4 @@
-name: ImmortalWrt-g68
+name: ImmortalWrt-g68-plus
 
 on:
   workflow_dispatch:
